@@ -1,3 +1,6 @@
+SELECT 
+FROM [Cyclistic Project].[dbo].[trip_data]
+
 -- Creating table to compare casual v member monthly
 
 ---- Firstly explore how to layout table to show total rides monthly
@@ -18,6 +21,8 @@ FROM [Cyclistic Project].[dbo].[trip_data]
 WHERE member_casual = 'member'
 GROUP BY month, year
 ORDER BY year, month
+
+---- Creating Temp Tables for Number of Rides of Casual and Member Users
 
 CREATE TABLE #member_riders
 (month INT,
@@ -51,6 +56,8 @@ WHERE member_casual = 'casual'
 GROUP BY month, year
 ORDER BY year, month
 
+----- Creating table for Data Visualisation
+
 SELECT
 #casual_riders.month,
 #casual_riders.year,
@@ -70,7 +77,7 @@ SELECT
   WHERE member_casual = 'casual'
   GROUP BY day_of_week
 
----- Creating temp table for casual
+---- Creating temp table for casual users
 CREATE TABLE #casual_riders_duration_daily
 (day_of_week varchar(50),
 duration_of_ride_casual INT
@@ -87,7 +94,7 @@ SELECT
  Select *
  FROM #casual_riders_duration_daily
 
- ---- Creating temp table for members
+ ---- Creating temp table for member users
 CREATE TABLE #member_riders_duration_daily
 (day_of_week varchar(50),
 duration_of_ride_member INT
@@ -104,7 +111,7 @@ SELECT
  Select *
  FROM #member_riders_duration_daily
 
- ---- Now to join the tables together
+ ---- Join tables together for Data Visualisation
 
 SELECT
 #casual_riders_duration_daily.day_of_week,
@@ -115,8 +122,9 @@ INNER JOIN #member_riders_duration_daily
 	ON #casual_riders_duration_daily.day_of_week = #member_riders_duration_daily.day_of_week
 ORDER BY day_of_week
 
--- Number of Rides per Week
----- Setup members
+-- Exploration for Number of Rides per Week 
+
+---- Create Temp Table for Members
 CREATE TABLE #member_riders_week
 (days_of_week varchar(50),
 num_of_rides_member INT
@@ -133,7 +141,7 @@ GROUP BY day_of_week
 SELECT * 
 FROM #member_riders_week
 
-----Setup casual
+---- Create Temp Table for Casual Users
 
 CREATE TABLE #casual_riders_week
 (days_of_week varchar(50),
@@ -151,7 +159,7 @@ GROUP BY day_of_week
 SELECT * 
 FROM #casual_riders_week
 
----- Joining Casual and Members as per Day of week
+---- Join Casual and Member tables as per Day of week for Data Visualisation
 
 SELECT
 #casual_riders_week.days_of_week,
@@ -163,6 +171,9 @@ INNER JOIN #member_riders_week
 ORDER BY days_of_week
 
 -- Exploration of Which Bike Type is Popular
+
+
+---- Creating Temp Table for Member Users
 
 CREATE TABLE #bike_type_member
 (rideable_type varchar(50),
@@ -180,7 +191,7 @@ GROUP BY rideable_type
 SELECT * 
 FROM #bike_type_member
 
-----Setup casual
+---- Creating Temp Table for Casual Users
 
 CREATE TABLE #bike_type_casual
 (rideable_type varchar(50),
@@ -198,7 +209,7 @@ GROUP BY rideable_type
 SELECT * 
 FROM #bike_type_casual
 
----- Joining Casual and Members as per Day of week
+---- Join Casual and Members as per Day of week for Data Visualisation
 
 SELECT
 #bike_type_casual.rideable_type,
