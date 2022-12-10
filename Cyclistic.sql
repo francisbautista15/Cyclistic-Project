@@ -77,7 +77,7 @@ SELECT
   WHERE member_casual = 'casual'
   GROUP BY day_of_week
 
----- Creating temp table for casual users
+---- Creating Temp Table for Casual Users
 CREATE TABLE #casual_riders_duration_daily
 (day_of_week varchar(50),
 duration_of_ride_casual INT
@@ -94,7 +94,7 @@ SELECT
  Select *
  FROM #casual_riders_duration_daily
 
- ---- Creating temp table for member users
+ ---- Creating Temp Table for Member Users
 CREATE TABLE #member_riders_duration_daily
 (day_of_week varchar(50),
 duration_of_ride_member INT
