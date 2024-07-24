@@ -3,7 +3,7 @@ FROM [Cyclistic Project].[dbo].[trip_data]
 
 -- Creating table to compare casual v member monthly
 
----- Firstly explore how to layout table to show total rides monthly
+---- Firstly explore how to layout table to show total rides monthly.
 SELECT
 month,
 year,
