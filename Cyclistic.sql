@@ -1,3 +1,13 @@
+/*
+
+EXPLORATION OF CYCLISTIC BIKE-SHARE DATA USING SQL
+Data Used: Cyclistic Database (dbo.trip_data) - Google
+
+Skills Highlighted: Aggregate Functions (COUNT, AVG), GROUP BY, JOINS, Temporary Tables, Data Preparation for Visualisation.
+
+
+*/
+
 SELECT 
 FROM [Cyclistic Project].[dbo].[trip_data]
 
@@ -218,3 +228,4 @@ FROM #bike_type_casual
 FULL OUTER JOIN #bike_type_member
 	ON #bike_type_casual.rideable_type = #bike_type_member.rideable_type
 	
+
